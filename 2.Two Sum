@@ -38,3 +38,8 @@ class Solution {
         return null;
     }
 }
+
+本质是查找，因为数组是无序的，查找起来只能是顺序查找或者放到hashmap中查找
+
+        }智能
+        }
