@@ -1,0 +1,88 @@
+Input: [1,4,3,2]
+
+Output: 4
+Explanation: n is 2, and the maximum sum of pairs is 4 = min(1, 2) + min(3, 4).
+
+一个2*n的数组，对数组进行配对，使配对成功后的两两数组中的较小数的所有和最大
+
+思路：如果使两两配对后，取较小数的和最大，那么应该排序数组，使其按照从小到大排列，然后取出每个配对的第一个数相加即可
+
+关键点在于排序
+
+1.不能叫做冒泡排序
+class Solution {
+    public void sort(int[] nums){
+        int temp = 0;
+        for(int i = 0; i < nums.length; i++){
+            for(int j = i + 1; j < nums.length; j++){
+                if(nums[i] > nums[j]){
+                    temp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = temp;
+                }
+            }
+        }
+    }
+    
+    public int min(int a, int b){
+        if(a < b) return a;
+        else return b;
+    }
+    public int arrayPairSum(int[] nums) {
+        int sum = 0;
+       
+        sort(nums);
+        for(int i = 0; i < nums.length; i += 2){
+            sum += min(nums[i], nums[i + 1]);
+        }
+        return sum;
+    }
+}
+该方法为最笨方法，但是超出系统的时间运算限制，排序算法为最简单排序， 即每一轮找出最小值，每次都需要交换数据
+冒泡排序
+public void sort(int[] nums){
+        
+        int minimum = 0;
+        for(int i = 0; i < nums.length; i++){
+            for(int j = nums.length - 1; j > i; j--){
+                if(nums[j] < nums[j - 1]){
+                    minimum = nums[j];
+                    nums[j] = nums[j - 1];
+                    nums[j - 1] = minimum;
+                }
+            }
+            
+        }
+    }
+ 该算法为冒泡排序，跟上面的一样
+
+2.交换次数少
+public void sort(int[] nums){
+        int minimum = 0;
+        int minimum_index = 0;
+        for(int i = 0; i < nums.length; i++){
+            minimum = nums[i];
+            minimum_index = i;
+            for(int j = i + 1; j < nums.length; j++){
+                if(minimum > nums[j]){
+                    minimum = nums[j];
+                    minimum_index = j;
+                }
+            }
+            if(minimum_index != i){
+                nums[minimum_index] = nums[i];
+                nums[i] = minimum;
+            }
+        }
+    }
+    该方法在排序算法上有点改进，增加了两个临时变量存放最小值和索引，每次循环只交换一次，但是仍然超过时间限制,这是简单选择排序
+    
+    3.public int arrayPairSum(int[] nums) {
+        int sum = 0;
+        Arrays.sort(nums);
+        for(int i = 0; i < nums.length; i += 2){
+            sum += min(nums[i], nums[i + 1]);
+        }
+        return sum;
+    }
+    使用了java的核心库，速度很快
