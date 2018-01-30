@@ -55,7 +55,22 @@ public void sort(int[] nums){
         }
     }
  该算法为冒泡排序，跟上面的一样
-
+public void sort(int[] nums){
+        int flag = 1;
+        int minimum = 0;
+        for(int i = 0; i < nums.length && flag; i++){
+            flag = 0;
+            for(int j = nums.length - 1; j > i; j--){
+                if(nums[j] < nums[j - 1]){
+                    minimum = nums[j];
+                    nums[j] = nums[j - 1];
+                    nums[j - 1] = minimum;
+                    flag = 1; //表示一轮比较中，有数据移动，如果为0，可以理解为在一次比较中下面的每个元素都比上面的大，因此不需要移动，所以以后不用循环
+                }
+            }
+            
+        }
+    }
 2.交换次数少
 public void sort(int[] nums){
         int minimum = 0;
