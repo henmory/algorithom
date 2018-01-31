@@ -1,0 +1,57 @@
+Input: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]
+Output: True
+Explanation:
+1234
+5123
+9512
+
+判断二维数组斜对角线上的数字是否一致，如果一致，返回true
+
+本质也是查找问题：
+
+思路：遍历每个元素，查看他的值是否与它斜对角的值一样
+1.class Solution {
+    public boolean isToeplitzMatrix(int[][] matrix) {
+       
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int temp = 0;
+        int i = 0;
+        int j = 0;
+        for(i = 1; i < rows; i++){
+            for(j = 1; j < columns; j++){
+                if(matrix[i][j] != matrix[i - 1][j -1]){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+直接可以想到的方法。
+
+2.斜对角线上的值有一下特点：1.行与列的差值为定制 2.数值相等，进而采用hashmap实现
+map(差值，值);
+
+class Solution {
+    public boolean isToeplitzMatrix(int[][] matrix) {
+       
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int i = 0;
+        int j = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for(i = 0; i < rows; i++){
+            for(j = 0; j < columns; j++){
+                if(!map.containsKey(i - j)){ //没有差值的值存进去
+                    map.put(i - j, matrix[i][j]);
+                }else{
+                    if(matrix[i][j] != map.get(i - j)){ //有了差值查看是否相等
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
