@@ -10,6 +10,7 @@ Explanation: n is 2, and the maximum sum of pairs is 4 = min(1, 2) + min(3, 4).
 关键点在于排序
 
 1.不能叫做冒泡排序
+
 class Solution {
     public void sort(int[] nums){
         int temp = 0;
@@ -101,3 +102,16 @@ public void sort(int[] nums){
         return sum;
     }
     使用了java的核心库，速度很快
+    
+   4.直接插入排序：＝＝＝》对于元素i比较它与之前的元素，如果小于比较的元素，那么元素后移，最后找到自己的位置
+   public void insertSort(int[] nums){
+    int i, j,temp;
+    for(i = 1; i < nums.length; i++){
+        if(nums[i] < nums[i - 1]){
+        temp = nums[i];
+        for(j = i - 1; temp < nums[j]; j--){
+            nums[j + 1] = nums[j]
+        }
+        nums[j + 1] = temp;
+    }
+   }
