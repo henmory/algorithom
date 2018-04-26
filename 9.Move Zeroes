@@ -68,6 +68,7 @@ class Solution {
     
     public void moveZeroes(int[] nums) {
         
+        //调整后，最后一个非0元素
         int lastNotZeroIndex = 0;
         
         for(int i = 0; i < nums.length; i++){
