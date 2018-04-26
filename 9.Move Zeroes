@@ -60,3 +60,26 @@ class Solution {
         
     }
 }
+
+
+2. 找到第一个非0的元素，然后把他放到第一个0元素的位置，这个算法是最简单的
+
+class Solution {
+    
+    public void moveZeroes(int[] nums) {
+        
+        int lastNotZeroIndex = 0;
+        
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] != 0){
+                nums[lastNotZeroIndex++] = nums[i];
+            }
+        }
+        
+        while(lastNotZeroIndex < nums.length){
+            nums[lastNotZeroIndex++] = 0;
+        }
+        
+        
+    }
+}
